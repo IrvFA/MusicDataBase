@@ -1,61 +1,36 @@
 <!doctype html>
 <html>
+  <head>
+      <!-- Include Dexie -->
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 
-<head>
-    <!-- Include Dexie -->
-    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+      <script>
+          //
+          // Define your database
+          //
+          var db = new Dexie("musicStore3_database");
+          db.version(1).stores({
+              albums: '++id,title,price'
+          });
 
-    <script>
-        //
-        // Define your database
-        //
-        var db = new Dexie('MusicStoreDB');
-
-
-        db.version(1).stores({
-            Album: "++albumID, title, genre, releaseYear, price, stock",
-            Label: "++labelID, name, country",
-            Artists: "++artistID, [firstName +lastName], nationality, nationality, birthDate",
-            Client: "++clientID, [firstName + lastName], telephone, email",
-            Producer: "++producerID; [firstName + lastName], nationality"
-        });
-        var Album = db.Album.defineClass({
-            albumID: Number,
-            title: String,
-            label: Label,
-            genre: String,
-            releaseYear: Number,
-            price: Number,
-            stock: Number,
-        })
-
-        //
-        // Put some data into it
-        //
-
-        db.transaction('rw', db.Album , async ()=> {
-
-            db.Album.put({ title: "Viva la Vida", genre: "Rock", price: 200, stock: 15}).then(function () {
-            //
-            // Then when data is stored, read from it
-            //
-            return db.Album.get('Viva la Vida');
-        }).then(function (Album) {
-            //
-            // Display the result
-            //
-            alert("Viva la Vida was released " + Album.releaseYear);
-        }).catch(function (error) {
-            //
-            // Finally don't forget to catch any error
-            // that could have happened anywhere in the
-            // code blocks above.
-            //
-            alert("Ooops: " + error);
-        });
-    });
-
-    </script>
-</head>
-
+          //
+          // Put some data into it
+          //
+          db.albums.put({title: "Circles", price: 280}).then (function(){
+              //
+              // Then when data is stored, read from it
+              //
+              return db.albums.get(1)
+          }).then (function(album){
+              alert ("Album with id: " + album.id + "is: "+ album.title)
+          }).catch(function(error) {
+             //
+             // Finally don't forget to catch any error
+             // that could have happened anywhere in the
+             // code blocks above.
+             //
+             alert ("Ooops: " + error);
+          });
+      </script>
+  </head>
 </html>
