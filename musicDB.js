@@ -5,6 +5,7 @@ Team Members:
 Irving Fuentes Aguilera 
 Jaime Orlando López Ramos
 Joaquín Ríos Corvera
+Jose Antonio Vazquez
 Objective: Apply our DB knowledge to implement an indexed Database
 */
 
