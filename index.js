@@ -28,12 +28,12 @@ form.onsubmit = addData
 function addData(e){
     e.preventDefault();
     let newItem = { title: titleInput.value, artist: artist.value, genre: genre.value, releaseYear: release.value, price: price.value, stock: stock.value};
-    db.transaction('rw', Album, () =>{
-        let request= Album.add(newItem);
-    }).then(()=>{
-        displayData()
-    }).catch(err => {
-    });
+        Album.add(newItem).then(function(){
+            alert("Album has been added");
+        }).catch(function(error) {
+            alert("Oops " +error);            
+        });
+        displayData();
 
     transaction.on("complete", function(){
         alert("Transaction completed");
