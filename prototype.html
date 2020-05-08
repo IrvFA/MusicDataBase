@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <title>Roma Music Store</title>
     <link href="prototype.css" rel="stylesheet">
-    <script src="index.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+
+    <script src="musicStoreDB.js"> </script>
   </head>
   <body>
     <header>
@@ -18,9 +22,9 @@
 
         </ul>
       </section>
-      <section class="new-note">
+      <section class="new-album">
         <h2>Enter your album</h2>
-        <form>
+        <form class="form" id="albumForm">
           <div>
             <label for="title">Album title</label>
             <input id="title" type="text" required>

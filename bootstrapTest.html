@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Roma Music Store</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container pt-3 my-3 bg-dark text-white">
+        <h1>Roma Music Store</h1>
+        <p>Inventory site</p>
+        <p id="demo"></p>
+    </div>
+    <div class="container pt-3">
+        <table class="table table-dark table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Album</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Release Year</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody id="album1">
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container pt-3">
+        <form action="/action_page.php" class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="albumName">Album:</label>
+              <input type="text" class="form-control" id="albumName" placeholder="Enter album" name="albumName" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="artistName">Artist:</label>
+              <input type="text" class="form-control" id="artistName" placeholder="Enter artist or band" name="artistName" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" class="form-control" id="genre" placeholder="Enter genre" name="genre" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+              </div>
+              <div class="form-group">
+                <label for="releaseYear">Release Year:</label>
+                <input type="number" class="form-control" id="releaseYear" placeholder="Enter release year" name="releaseYear" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+              </div>
+              <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" placeholder="Enter price" name="price" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+              </div>
+              <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="number" class="form-control" id="stock" placeholder="Enter stock only if adding" name="stock">
+              </div>
+              <button type="submit" class="btn btn-secondary" id="addBtn1">Add</button>
+        </form>
+
+        <script>
+            // Disable form submissions if there are invalid fields
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                  form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+              }, false);
+            })();
+            </script>
+    </div>
+    
+
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-secondary" id="deleteBtn">Search</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-secondary" id="submitBtn">Delete</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="container pt-3">
+        <div class="parent">
+           
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="bootstrapTest.js"></script>
+</body>
+
+</html>
