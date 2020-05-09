@@ -14,10 +14,28 @@ $(document).ready(function () {
     // all custom jQuery will go here
     firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
-    $("addBtn1").submit(addData(db));
+    $("#albumForm").submit(function() {
+        $("#demo").html("Welcome");
+        db.collection("Albums").add({
+            title: $("#albumName").val(),
+            artist: $("#artistName").val(),
+            genre: $("#genre").val(),
+            releaseYear: $("#releaseYear").val(),
+            price: $("#price").val(),
+            stock: $("#stock").val()
+        })
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+                
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
+        return this.some_flag_variable;
+      });
 });
 
-function addData(db,e) {
+function addData(db) {
     $("#demo").html("Welcome");
     db.collection("Albums").add({
         title: $("#albumName").val(),
@@ -29,8 +47,11 @@ function addData(db,e) {
     })
         .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
+            $("#alert").empty();
+            $('.parent').append("<div class='alert alert-success alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Success! message sent successfully.</div>")
         })
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
-}
+    return this.some_flag_variable;
+  }
