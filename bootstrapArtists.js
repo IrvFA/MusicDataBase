@@ -16,12 +16,11 @@ updateTable();
 
 $(document).ready(function () {
     // all custom jQuery will go here
-    $("#artistForm").submit(addData);
+    //$("#artistForm").submit(addData); <-- se hace directo en el script de html
 });
 
 
 function addData() {
-    if ($("#artistName").val() != " " && $("#birthday").val().toString() != "" && $("#nationality").val() != "") {
         
     $("#demo").html("Welcome");
     db.collection("Artists").add({
@@ -38,7 +37,7 @@ function addData() {
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
-    }
+    
     return this.some_flag_variable;
   }
 
@@ -55,8 +54,20 @@ db.collection("Artists").get().then((querySnapshot) => {
         <td>${doc.data().name}</td>
         <td>${doc.data().birthday}</td>
         <td>${doc.data().nationality}</td>
+        <td><button class = "btn btn-danger" onclick = "deleteArtist('${doc.id}')">Delete</button></td>
+        <td><button class = "btn btn-warning">Modify</button></td>
       </tr>
         `
     });
+});
+}
+
+//Delete from firebase
+function deleteArtist(id){
+db.collection("Artists").doc(id).delete().then(function() {
+    console.log("Document successfully deleted!");
+    updateTable();
+}).catch(function(error) {
+    console.error("Error removing document: ", error);
 });
 }

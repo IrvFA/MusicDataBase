@@ -6,6 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -20,18 +27,35 @@
     
     <div class="container pt-3">
 
-      <table class="table">
+      <input class="form-control" id="myInput" type="text" placeholder="Search..">
+
+      <table class="table my-3">
         <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Birthday</th>
             <th scope="col">Nationality</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Modify</th>
           </tr>
         </thead>
         <tbody id="artistTable">
+          <tr>
+          </tr>
         </tbody>
       </table>
+
+      <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#artistTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 
 
         <form action="javascript:alert( 'success!' );" class="needs-validation" id="artistForm" novalidate>
@@ -69,6 +93,8 @@
                     if (form.checkValidity() === false) {
                       event.preventDefault();
                       event.stopPropagation();
+                    }else{
+                      addData();
                     }
                     form.classList.add('was-validated');
                   }, false);
@@ -85,13 +111,9 @@
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="bootstrapArtists.js"></script>
+
+
 </body>
 
 </html>
