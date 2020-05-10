@@ -12,10 +12,28 @@
 
     <div class="container pt-3 my-3 bg-dark text-white">
         <h1>Roma Music Store</h1>
-        <p>Add artist</p>
+        <p>Artists</p>
         <p id="demo"></p>
+
+
     </div>
+    
     <div class="container pt-3">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Nationality</th>
+          </tr>
+        </thead>
+        <tbody id="artistTable">
+        </tbody>
+      </table>
+
+
         <form action="javascript:alert( 'success!' );" class="needs-validation" id="artistForm" novalidate>
             <div class="form-group">
               <label for="artistName">Name:</label>

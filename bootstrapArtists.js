@@ -9,31 +9,20 @@ var firebaseConfig = {
     measurementId: "G-05R68BMFPF"
 };
 
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+updateTable();
+
 
 $(document).ready(function () {
     // all custom jQuery will go here
-    firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-    $("#artistForm").submit(function() {
-        $("#demo").html("Welcome");
-        db.collection("Artists").add({
-            name: $("#artistName").val(),
-            birthday: $("#birthday").val().toString(),
-            nationality: $("#nationality").val()
-  
-        })
-            .then(function (docRef) {
-                console.log("Document written with ID: ", docRef.id);
-                
-            })
-            .catch(function (error) {
-                console.error("Error adding document: ", error);
-            });
-        return this.some_flag_variable;
-      });
+    $("#artistForm").submit(addData);
 });
 
-function addData(db) {
+
+function addData() {
+    if ($("#artistName").val() != " " && $("#birthday").val().toString() != "" && $("#nationality").val() != "") {
+        
     $("#demo").html("Welcome");
     db.collection("Artists").add({
         name: $("#artistName").val(),
@@ -44,9 +33,30 @@ function addData(db) {
             console.log("Document written with ID: ", docRef.id);
             $("#alert").empty();
             $('.parent').append("<div class='alert alert-success alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Success! message sent successfully.</div>")
+            updateTable();
         })
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
+    }
     return this.some_flag_variable;
   }
+
+  //Read from firebase
+function updateTable(){
+var artistTable = document.getElementById("artistTable");
+db.collection("Artists").get().then((querySnapshot) => {
+    artistTable.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        artistTable.innerHTML += `
+        <tr>
+        <th scope="row">${doc.id}</th>
+        <td>${doc.data().name}</td>
+        <td>${doc.data().birthday}</td>
+        <td>${doc.data().nationality}</td>
+      </tr>
+        `
+    });
+});
+}
