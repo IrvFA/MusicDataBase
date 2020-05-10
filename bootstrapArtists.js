@@ -55,7 +55,7 @@ db.collection("Artists").get().then((querySnapshot) => {
         <td>${doc.data().birthday}</td>
         <td>${doc.data().nationality}</td>
         <td><button class = "btn btn-danger" onclick = "deleteArtist('${doc.id}')">Delete</button></td>
-        <td><button class = "btn btn-warning">Modify</button></td>
+        <td><button class = "btn btn-warning" onclick = "updateArtist('${doc.id}','${doc.data().name}','${doc.data().birthday}','${doc.data().nationality}')">Modify</button></td>
       </tr>
         `
     });
@@ -70,4 +70,48 @@ db.collection("Artists").doc(id).delete().then(function() {
 }).catch(function(error) {
     console.error("Error removing document: ", error);
 });
+}
+
+//Update firebase
+
+function updateArtist(id, name, birthday, nationality){
+
+    document.getElementById("artistName").value = name;
+    document.getElementById("birthday").value = birthday;
+    document.getElementById("nationality").value = nationality;
+    var button = document.getElementById("addBtn1");
+    button.innerHTML = "Update";
+
+    button.onclick = function(){
+
+
+
+        var currentArtist = db.collection("Artists").doc(id);
+
+        var aName = $("#artistName").val();
+        var aBirthday = $("#birthday").val().toString();
+        var aNationality = $("#nationality").val();
+
+        return currentArtist.update({
+            name: aName,
+            birthday: aBirthday,
+            nationality: aNationality
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+            button.innerHTML = "Add";
+            document.getElementById("artistName").value = "";
+            document.getElementById("birthday").value = "";
+            document.getElementById("nationality").value = "";
+
+            updateTable();
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+
+    }
+
+
 }

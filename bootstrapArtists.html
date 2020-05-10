@@ -29,8 +29,8 @@
 
       <input class="form-control" id="myInput" type="text" placeholder="Search..">
 
-      <table class="table my-3">
-        <thead>
+      <table class="table my-3 table-light table-striped">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
@@ -77,31 +77,35 @@
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
               </div>
-              <button type="submit" class="btn btn-secondary" id="addBtn1">Add</button>
+              <button type="submit" class="btn btn-secondary" id="addBtn1" onclick="addArtistScript">Add</button>
         </form>
 
-        <script>
-            // Disable form submissions if there are invalid fields
-            (function() {
-              'use strict';
-              window.addEventListener('load', function() {
-                // Get the forms we want to add validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                  form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }else{
-                      addData();
+
+        <script id="addArtistScript">
+          // Disable form submissions if there are invalid fields
+          (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+              // Get the forms we want to add validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  else{
+                    if (document.getElementById("addBtn1").innerHTML == "Add"){
+                    addData();
                     }
-                    form.classList.add('was-validated');
-                  }, false);
-                });
-              }, false);
-            })();
-            </script>
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+            }, false);
+          })();
+          </script>
     </div>
     
 
